@@ -1,0 +1,6 @@
+#!/bin/bash
+
+insult=`shuf -n1  /usr/share/dict/adjectives`" "`shuf -n1  /usr/share/dict/swears`" "`shuf -n1  /usr/share/dict/nouns`
+echo $insult
+
+#Sources: https://blogs.warwick.ac.uk/mikewillis/entry/random_words/ , https://github.com/schmich/spicy-proton , https://github.com/tr00st/insult_generator

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+icing="Icing: `shuf -n1  /usr/share/dict/flavors`" 
+filling="Filling: `shuf -n1  /usr/share/dict/flavors`"
+cake="Cake: `shuf -n1  /usr/share/dict/flavors`"
+
+echo $icing
+echo $filling
+echo $cake
