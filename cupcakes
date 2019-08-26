@@ -1,4 +1,8 @@
 #!/bin/bash
+# Script I made for my girlfriend, Carson Schulte when I was bored at work one day. She wanted to know if it was possible, so I created the dictionary and this really simple script. Hope you like  it, Chip <3. (Spoiler: She does :))
+# Copyright (C) 2019 Daniel Opdahl (dopdahl16@gmail.com)
+# Permission to copy and modify is granted under the GNU General Public License v3.0 license
+# Last revised 8/25/19
 
 icing="Icing: `shuf -n1  /usr/share/dict/flavors`" 
 filling="Filling: `shuf -n1  /usr/share/dict/flavors`"
