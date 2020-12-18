@@ -1,0 +1,44 @@
+#!/bin/bash
+# A script to update and upgrade all apt-get packages on WSL Ubuntu
+# Copyright (C) 2019 Daniel Opdahl (dopdahl16@gmail.com)
+# Permission to copy and modify is granted under the GNU General Public License v3.0 license
+# Last revised 12/18/20
+
+errorFlag=false
+
+echo "---Running apt-get autoclean---"
+apt-get autoclean
+if [ ! $? -eq 0 ]
+then
+        echo "Cannot run apt-get autoclean"
+        errorFlag=true
+fi
+
+echo "---Running apt-get autoremove---"
+apt-get autoremove
+if [ ! $? -eq 0 ]
+then
+        echo "Cannot run apt-get autoremove"
+        errorFlag=true
+fi
+
+echo "---Running apt-get update---"
+apt-get update
+if [ ! $? -eq 0 ]
+then
+        echo "Cannot run apt-get update"
+        errorFlag=true
+fi
+
+echo "---Running apt-get upgrade---"
+apt-get upgrade -y
+if [ ! $? -eq 0 ]
+then
+        echo "Cannot run apt-get upgrade"
+        errorFlag=true
+fi
+
+if [ errorFlag == true ]
+then
+        echo "Looks like you need to give me root permissions to do what I need to do. You may be in a directory where you don't have writing permissions. Please run me with sudo, or otherwise gain writing and modifying permission to files in this directory."
+fi
