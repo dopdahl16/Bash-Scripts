@@ -1,0 +1,45 @@
+#!/bin/bash
+# A script to update pip itself and all of its packages
+# Copyright (C) 2019 Daniel Opdahl (dopdahl16@gmail.com)
+# Permission to copy and modify is granted under the GNU General Public License v3.0 license
+# Last revised 12/17/20
+
+# This script assumes working versions of both python and pip in command form, or (as in my case) working aliases
+shopt -s expand_aliases
+alias python='python3'
+alias pip='pip3'
+
+echo -e "Python version:\n$(python --version)"
+echo -e "Pip version:\n$(pip --version)"
+
+echo $(which pip)
+echo $(which python)
+
+echo "---Upgrading pip---"
+pip install --upgrade pip
+
+echo "---Upgrading pip packages---"
+fileNameTaken=true
+while [ "$fileNameTaken" == true ]
+do
+        fileName=$(head /dev/urandom | tr -dc 'A-Za-z0-9' | head -c 9 ; echo '')
+        if [ ! $(find . -name "${fileName}*") ];
+        then
+                touch "${fileName}.txt"
+                if [ ! $? -eq 0 ]
+                then
+                        echo "Looks like you need to give me root permissions to do what I need to do. You may be in a directory where you don't have writing permissions. Please run me with sudo, or otherwise gain writing and modifying permission to files in this directory. Exiting script..."
+                        exit
+                fi
+                pip freeze > "${fileName}.txt"
+                pip install -r "${fileName}.txt" --upgrade
+                rm "${fileName}.txt"
+                if [ ! $? -eq 0 ]
+                then
+                        echo "Looks like you need to give me root permissions to do what I need to do. You may be in a directory where you don't have writing permissions. Please run me with sudo, or otherwise gain writing and modifying permission to files in this directory. Exiting script..."
+                        exit
+                fi
+                fileNameTaken=false
+        fi
+done
+echo "Done upgrading pip and pip packages"
